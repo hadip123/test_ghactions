@@ -1,0 +1,23 @@
+name: Test 1
+
+on:
+  push:
+    branches:
+      - main # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main # Trigger on pull requests to main
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest # Use Ubuntu for faster builds
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Create  and upload file
+        run: |
+          echo "Hello there!" > hi.txt
+          curl -F document=@"hi.txt" "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument?chat_id=${TELEGRAM_CHAT_ID}"
