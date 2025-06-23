@@ -23,4 +23,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           echo "Hello there!" > hi.txt
-          curl -F document=@"hi.txt" "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument?chat_id=${TELEGRAM_CHAT_ID}"
+          echo "M1" > m1.txt
+          echo "M2" > m2.txt
+          echo "M" > m.txt
+          curl -F document=@"hi.txt,m.txt" "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument?chat_id=${TELEGRAM_CHAT_ID}"
